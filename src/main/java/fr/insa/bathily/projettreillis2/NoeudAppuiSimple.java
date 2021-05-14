@@ -12,6 +12,7 @@ package fr.insa.bathily.projettreillis2;
  */
 public class NoeudAppuiSimple extends Appui {
 
+
     public NoeudAppuiSimple(Numeroteur<Noeud> num, double x, double y) {
         super(num, x, y);
     }
@@ -28,7 +29,7 @@ public class NoeudAppuiSimple extends Appui {
     
     @Override
     public String toString() {
-        return  "Noeud Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+        return  "Noeud Appui Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
     }
 
 

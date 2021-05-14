@@ -58,3 +58,29 @@ public static Noeud demandeNoeud(){
 
 }
 
+/*classe noeud simple 
+public class NoeudSimple extends Noeud {
+    
+    ublic NoeudSimple(Numeroteur<Noeud> num, double x, double y) {
+        super(num, x, y);
+    }
+   
+    
+    public NoeudSimple(Numeroteur<Noeud> num, double []p) {
+        super(num, p, col);
+    }
+   
+    // todo : rechercher le "super"
+    public NoeudSimple(Numeroteur<Noeud> num) {
+        super(num);
+    }
+    
+    @Override
+    public String toString() {
+        return  "Noeud Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+    }
+
+
+}*/
+
+

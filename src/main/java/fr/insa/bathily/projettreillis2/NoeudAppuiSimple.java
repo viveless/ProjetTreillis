@@ -32,5 +32,27 @@ public class NoeudAppuiSimple extends Appui {
         return  "Noeud Appui Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
     }
 
+/* todo : classe noeud appui double
+public class NoeudAppuiDouble {
+
+public NoeudAppuiDouble(Numeroteur<Noeud> num, double x, double y) {
+        super(num, x, y);
+    }
+   
+    
+    public NoeudAppuiDouble(Numeroteur<Noeud> num, double []p) {
+        super(num, p, col);
+    }
+   
+    public NoeudApppuiDouble(Numeroteur<Noeud> num) {
+        super(num);
+    }
+    
+    @Override
+    public String toString() {
+        return  "Noeud Appui Double {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+    }
+}
+*/
 
 }

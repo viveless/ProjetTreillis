@@ -10,47 +10,47 @@ package fr.insa.bathily.projettreillis2;
  *
  * @author mbathily01
  */
-public class NoeudAppuiSimple extends Appui {
+public class AppuiSimple extends Appui {
 
 
-    public NoeudAppuiSimple(Numeroteur<Noeud> num, double x, double y) {
+    public AppuiSimple(Numeroteur<Noeud> num, double x, double y) {
         super(num, x, y);
     }
    
     
-    public NoeudAppuiSimple(Numeroteur<Noeud> num, double []p) {
+    public AppuiSimple(Numeroteur<Noeud> num, double []p) {
         super(num, p, col);
     }
    
     // todo : rechercher le "super"
-    public NoeudAppuiSimple(Numeroteur<Noeud> num) {
+    public AppuiSimple(Numeroteur<Noeud> num) {
         super(num);
     }
     
     @Override
     public String toString() {
-        return  "Noeud Appui Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+        return  "Appui Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
     }
 
 /* todo : classe noeud appui double
-public class NoeudAppuiDouble {
+public class AppuiDouble {
 
-public NoeudAppuiDouble(Numeroteur<Noeud> num, double x, double y) {
+public AppuiDouble(Numeroteur<Noeud> num, double x, double y) {
         super(num, x, y);
     }
    
     
-    public NoeudAppuiDouble(Numeroteur<Noeud> num, double []p) {
+    public AppuiDouble(Numeroteur<Noeud> num, double []p) {
         super(num, p, col);
     }
    
-    public NoeudApppuiDouble(Numeroteur<Noeud> num) {
+    public ApppuiDouble(Numeroteur<Noeud> num) {
         super(num);
     }
     
     @Override
     public String toString() {
-        return  "Noeud Appui Double {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+        return  "Appui Double {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
     }
 }
 */

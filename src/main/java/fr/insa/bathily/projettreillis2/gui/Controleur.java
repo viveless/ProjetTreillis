@@ -134,7 +134,7 @@ public void clicDansZoneDessin(MouseEvent t) {
             Noeud pclic = this.posInModel(t.getX(), t.getY());
             Groupe model = this.vue.getModel();
             model.add(pclic);
-            this.changeEtat(30)
+            this.changeEtat(30);
         // appui simple
         } else if (this.etat== 31){
             AppuiSimple pclic = this.posInModel(t.getX(), t.getY());

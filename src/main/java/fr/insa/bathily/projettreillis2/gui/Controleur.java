@@ -38,20 +38,25 @@ public void changeEtat(int nouvelEtat) {
             this.vue.getbGrouper().setDisable(true);
             this.vue.redrawAll();
         } else if (nouvelEtat == 21) {
-            // creation de segments étape 2
-        }
-        this.etat = nouvelEtat;
-        } else if (nouvelEtat == 30) {
-            // creation de noeuds
-            this.vue.getRbPoints().setSelected(true);
+            // creation de segments étape 2 todo
+            this.vue.getRbSegments().setSelected(true);
             this.selection.clear();
             this.vue.getbGrouper().setDisable(true);
-            this.vue.getbRbSegments().setDisable(true);
+            this.vue.redrawAll();
+        } else if (nouvelEtat == 30) {
+            // creation de noeuds
+            this.vue.getRbNoeudSimple().setSelected(true);
+            this.selection.clear();
+            this.vue.getbGrouper().setDisable(true);
+            this.vue.getbRbBarre().setDisable(true);
+            this.vue.getbRbAppuiSimple().setDiasable(true);
+            this.vue.getRbAppuiDouble().setDisable(true);
             this.vue.redrawAll();
     }
+}
 // permet d'avoir un noeud ( point )
 // todo faire les différentes catégories de noeuds
-public Noeud posInModel(double xVue, double yVue) {
+    public NoeudSimple posInModel(double xVue, double yVue) {
         Transform modelVersVue = this.vue.getcDessin().getTransform();
         Noeud2D ptrans;
         try {
@@ -59,10 +64,36 @@ public Noeud posInModel(double xVue, double yVue) {
         } catch (NonInvertibleTransformException ex) {
             throw new Error(ex);
         }
-        Noeud pclic = new Noeud(ptrans.getX(), ptrans.getY());
-        pclic.setCouleur(this.vue.getCpCouleur().getValue());
+        NoeudSimple pclic = new NoeudSimple(ptrans.getX(), ptrans.getY());
         return pclic;
     }
+    public AppuiSimple posInModel( double xVue, double yVue){
+        Transform modelVersVue = this.vue.getcDessin().getTrasnform();
+        Noeud2d ptrans;
+        try{
+            ptrans= modelversVue.inverseTransform(xVue,yVue);
+            }
+        catch ( NonInvertibleTransformException ex){
+            throw new Error(ex);
+            }
+        AppuiSimple pclic = new AppuiSimple(ptrans.getX(), ptrans.getY());
+        return pclic;
+        }
+
+public AppuiDouble posInModel( double xVue, double yVue){
+        Transform modelVersVue = this.vue.getcDessin().getTrasnform();
+        Noeud2d ptrans;
+        try{
+            ptrans= modelversVue.inverseTransform(xVue,yVue);
+            }
+        catch ( NonInvertibleTransformException ex){
+            throw new Error(ex);
+            }
+        AppuieDouble pclic = new AppuieDouble(ptrans.getX(), ptrans.getY());
+        return pclic;
+        }
+
+
 public void clicDansZoneDessin(MouseEvent t) {
         if (this.etat == 10) {
             Point pclic = this.posInModel(t.getX(), t.getY());
@@ -97,34 +128,41 @@ public void clicDansZoneDessin(MouseEvent t) {
             this.vue.getModel().add(ns);
             this.vue.redrawAll();
             this.changeEtat(20);
-        }
-        // avoir un noeud -> travailler bc menu défilant(choicebox)
+
+        // noeud simple
         } else if (this.etat == 30) {
-            Point pclic = this.posInModel(t.getX(), t.getY());
+            Noeud pclic = this.posInModel(t.getX(), t.getY());
             Groupe model = this.vue.getModel();
             model.add(pclic);
-    }
+            this.changeEtat(30)
+        // appui simple
+        } else if (this.etat== 31){
+            AppuiSimple pclic = this.posInModel(t.getX(), t.getY());
+            Groupe model = this.vue.getModel();
+            model.add(pclic);
+            this.changeEtat(31);
+        // appui double
+        }else if (this.etat== 32){
+            AppuiDouble pclic = this.posInModel(t.getX(), t.getY());
+            Groupe model = this.vue.getModel();
+            model.add(pclic);
+            this.changeEtat(32);
+        }
+}
 public void boutonSelect(ActionEvent t) {
         this.changeEtat(10);
     }
 public void boutonBarre(ActionEvent t) {
         this.changeEtat(20);
     }
-
-public void boutonNoeud(ActionEvent t) {
+public void boutonNoeudSimple(ActionEvent t){
         this.changeEtat(30);
     }
-public void boutonNoeudSimple(ActionEvent t){
+public void boutonAppuiSimple(ActionEvent t){
         this.changeEtat(31);
     }
-public void boutonNoeudAppui(ActionEvent t){
+public void boutonAppuiDouble(ActionEvent t){
         this.changeEtat(32);
-    }
-public void boutonNoeudAppuiSimple(ActionEvent t){
-        this.changeEtat(33);
-    }
-public void boutonNoeudAppuiDouble(ActionEvent t){
-        this.changeEtat(34);
     }
 
 // desactivation des boutons inutiles en cas d'utilisation

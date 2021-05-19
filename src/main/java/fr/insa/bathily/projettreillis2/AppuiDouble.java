@@ -10,26 +10,25 @@ package fr.insa.bathily.projettreillis2;
  *
  * @author mbathily01
  */
-public class AppuiSimple extends Appui {
+public class AppuiDouble extends Appui{
 
-
-    public AppuiSimple(Numeroteur<Noeud> num, double x, double y) {
+    public AppuiDouble(Numeroteur<Noeud> num, double x, double y) {
         super(num, x, y);
     }
    
     
-    public AppuiSimple(Numeroteur<Noeud> num, double []p) {
+    public AppuiDouble(Numeroteur<Noeud> num, double []p) {
         super(num, p, col);
     }
    
-    
-    public AppuiSimple(Numeroteur<Noeud> num) {
+    public ApppuiDouble(Numeroteur<Noeud> num) {
         super(num);
     }
     
     @Override
     public String toString() {
-        return  "Noeud Appui Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
+        return  "Noeud Appui Double {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
     }
+
 
 }

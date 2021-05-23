@@ -8,79 +8,121 @@ package fr.insa.bathily.projettreillis2;
 
 /**
  *
- * @author mbathily01
+ * @author maxim
  */
-public abstract class Noeud {
+
+public abstract class Noeud{
     private double px;
     private double py;
-    private int id;
+    private Numeroteur<Noeud>  num;
+    
+    private Treillis treillis;
 
-        
 
-    public Noeud(Numeroteur<Noeud> num, double x, double y){
-        this.px = x;
-        this.py = y;
-        this.id = num.getOrCreateId(this);
-       
+/** constructeur de la classe Noeud
+     * @param abs
+     * @param ord
+     * @param id*/
+    
+public Noeud(double abs, double ord, Numeroteur<Noeud> id){
+        this.px = abs;
+        this.py = ord;
+        this.num = id;
 }
-// get et set + void pour avoir les valeurs
-    public double getPx() {
-        return px;
-    }
 
-    public void setPx(double px) {
+public Noeud(double abs, double ord){
+    this.px = abs;
+    this.py = ord;
+}
+
+
+public double getPx(){
+    return this.px;
+}
+
+
+public void setPx(double px) {
         this.px = px;
     }
 
-    public double getPy() {
-        return py;
-    }
 
-    public void setPy(double py) {
+public double getPy(){
+    return this.py;
+}
+
+public void setPy(double py) {
         this.py = py;
     }
-    public int getId() {
-        return id;
-    }   
 
+
+@Override
 public String toString(){
     return "[" + px + "," + py + "}";
 }
 
 
+public double distanceNoeud(Noeud p) {
+        double dx = this.px - p.px;
+        double dy = this.py - p.py;
+        return Math.sqrt(dx*dx+dy*dy);
+}
+
+        
 public static Noeud demandeNoeud(){
     System.out.println("abscisse : ");
-    double px = Lire.d();
+    double abs = Lire.d();
     System.out.println("ordonnee : ");
-    double py = Lire.d();
-    return new Noeud(px, py);
+    double ord = Lire.d();
+    Numeroteur id;
+        id = new Numeroteur<Noeud>();
+    return new Noeud(abs, ord, id) {};
 }
 
+
+public double maxX(){
+    return this.px;
 }
 
-/*classe noeud simple 
-public class NoeudSimple extends Noeud {
-    
-    ublic NoeudSimple(Numeroteur<Noeud> num, double x, double y) {
-        super(num, x, y);
-    }
-   
-    
-    public NoeudSimple(Numeroteur<Noeud> num, double []p) {
-        super(num, p, col);
-    }
-   
-    // todo : rechercher le "super"
-    public NoeudSimple(Numeroteur<Noeud> num) {
-        super(num);
-    }
-    
-    @Override
-    public String toString() {
-        return  "Noeud Simple {\n" + "id : "+getId()+" ; ("+ this.getPx() +","+ this.getPy() +")\n}";
-    }
+
+public double minX(){
+    return this.px;
+}
 
 
-}*/
+public double maxY(){
+    return this.py;
+}
+
+
+public double minY(){
+    return this.py;
+}
+
+public Numeroteur<Noeud> getNum() {
+    return num;
+    }
+    
+public void save(Writer w, Numeroteur<Noeud> num) throws IOException {
+        if(! num.objExist(this)) {
+            int id;
+            id = num.creeNum(this);
+            w.append("Point;"+id+";"+this.px+";"+this.py+
+                    ";" + /** FigureSimple.saveColor(this.getCouleur())**/  "\n");
+        }
+    }
+
+    public Treillis getTreillis() {
+        return treillis;
+    }
+
+    public void setTreillis(Treillis treillis) {
+        this.treillis = treillis;
+    }
+    
+
+}
+        
+
+
 
 

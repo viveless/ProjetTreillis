@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 
+package fr.insa.bathily.projettreillis2;
+
+import javafx.scene.transform.Transform;
+
 /**
  *
- * @author donia
+ * @author maxim
  */
+
 public class RectangleHV {
 
 private double xmin ; 
@@ -15,15 +20,20 @@ private double xmax ;
 private double ymin;
 private double ymax;
 
-Public RectangleHV(double xmin , double xmax, double ymin, double ymax ) {
-this.xmin=xmin ;
-this.xmax=xmax;
+
+public RectangleHV(double xmin , double xmax, double ymin, double ymax ) {
+this.xmin = xmin ;
+this.xmax = xmax;
 this.ymin = ymin ;
 this.ymax= ymax ;
-
-public String toString() { 
-return "RectangleHV"+"xmin"+ xmin , "xmax" +xmax , "ymin"+ymin , "ymax"+ymax ;
 }
+
+
+@Override
+public String toString() { 
+    return "RectangleHV: xmin" + xmin + "xmax" + xmax + "ymin" + ymin + "ymax" + ymax ;
+}
+
 
 public RectangleHV scale(double facteur) { 
 double dx = this.xmax - this.xmin ;
@@ -43,15 +53,18 @@ double cy = (this.ymax+this.ymin)/2 ;
         return new RectangleHV(this.xmin-dx,this.xmax-dx,this.ymin,this.ymax);
     }
     
+    
     public RectangleHV translationDroite(double partieConservee) {
         double dx = (this.xmax - this.xmin)*(1-partieConservee);
         return new RectangleHV(this.xmin+dx,this.xmax+dx,this.ymin,this.ymax);
     }
     
+    
     public RectangleHV translationHaut(double partieConservee) {
         double dy = (this.ymax - this.ymin)*(1-partieConservee);
         return new RectangleHV(this.xmin,this.xmax,this.ymin-dy,this.ymax-dy);
     }
+    
     
    public RectangleHV translationBas(double partieConservee) {
         double dy = (this.ymax - this.ymin)*(1-partieConservee);
@@ -92,43 +105,47 @@ double cy = (this.ymax+this.ymin)/2 ;
 
    
     public double getxMin() {
-        return xmin;
+        return this.xmin;
     }
 
     
     public double getxMax() {
-        return xmax;
+        return this.xmax;
     }
 
    
     public double getyMin() {
-        return ymin;
+        return this.ymin;
     }
 
    
     public double getyMax() {
-        return ymax;
+        return this.ymax;
     }
 
     
     public void setxMin(double xMin) {
-        this.xmin = xmin;
+        this.xmin = xMin;
     }
 
     
     public void setxMax(double xMax) {
-        this.xmax = xmax;
+        this.xmax = xMax;
     }
 
    
     public void setyMin(double yMin) {
-        this.ymin = ymin;
+        this.ymin = yMin;
     }
 
     
     public void setyMax(double yMax) {
-        this.ymax = ymax;
+        this.ymax = yMax;
     }
+
+
+
+}
 
 
 

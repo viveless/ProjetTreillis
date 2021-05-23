@@ -4,16 +4,9 @@
  * and open the template in the editor.
  */
 
+
 package fr.insa.bathily.projettreillis2;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.insa.bathily.projettreillis2;
-
-import fr.insa.bathily.projettreillis2.MainDessin.Numeroteur;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,11 +15,15 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author maxim
  */
-public class Barre extends Figure {
+
+public class Barre {
 
     private Noeud debut;
     private Noeud fin;
     private TypeBarre type;
+    public Numeroteur<Barre> num;
+    
+    private Treillis treillis;
 
     public Barre(Noeud debut, Noeud fin, TypeBarre type) {  
         this.debut = debut;
@@ -34,6 +31,11 @@ public class Barre extends Figure {
         this.type = type ; 
     }
 
+    public Barre(Noeud debut, Noeud fin){
+        this.debut = debut;
+        this.fin = fin;
+    }
+    
     public Noeud getDebut() {
         return debut;
     }
@@ -41,23 +43,19 @@ public class Barre extends Figure {
     public Noeud getFin() {
         return fin;
     }
-
-    @Override
+    
     public double maxX() {
         return Math.max(this.debut.maxX(), this.fin.maxX());
     }
 
-    @Override
     public double minX() {
         return Math.min(this.debut.maxX(), this.fin.maxX());
     }
     
-    @Override
     public double maxY() {
         return Math.max(this.debut.maxY(), this.fin.maxY());
     }
     
-    @Override
     public double minY() {
         return Math.min(this.debut.minY(), this.fin.minY());
     }
@@ -106,7 +104,7 @@ public class Barre extends Figure {
         } else if (up > 1) {
             return this.fin.distanceNoeud(p);
         } else {
-            Noeud p4 = new Noeud(x1 + up * (x2 - x1), y1 + up * (y2 - y1));
+            Noeud p4 = new Noeud(x1 + up * (x2 - x1), y1 + up * (y2 - y1)) {};
             return p4.distanceNoeud(p);
         }
     }
@@ -120,16 +118,25 @@ public class Barre extends Figure {
         context.strokeLine(this.debut.getPx(), this.debut.getPy(), this.fin.getPx(), this.fin.getPy());
     }
 
-    /** TODO public void save(Writer w, Numeroteur<Figure> num) throws IOException {
+ public void save(Writer w, Numeroteur<Barre> num) throws IOException {
         if (!num.objExist(this)) {
-            int id = num.creeID(this);
-            this.debut.save(w, num);
-            this.fin.save(w, num);
+            int id = num.creeNum(this);
+            this.debut.save(w, this.debut.getNum());
+            this.fin.save(w, this.fin.getNum());
             w.append("Segment" + id +
-                    num.getID(this.debut) + ";" + num.getID(this.fin)// + 
-                    //";" + FigureSimple.saveColor(this.getCouleur())+"\n"
-            );
+                    this.debut.getNum() + ";" + this.fin.getNum());
         }
     }
+
+    Treillis getTreillis() {
+        return this.treillis;
+    }
+
+    void setTreillis(Treillis treillis) {
+        this.treillis = treillis;
+    }
+
+}
+
     */
 }

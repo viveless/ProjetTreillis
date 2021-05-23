@@ -3,19 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package fr.insa.bathily.projettreillis2;
+
+import java.io.IOException;
+import java.io.Writer;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
  * @author donia
  */
+
 public class Segment {
-    
-}
-public class Segment extends FigureSimple {
 
     private Point debut;
     private Point fin;
+    
+    /**
+     * @param debut the debut to set
+     */
+    public void setDebut(Point debut) {
+        this.debut = debut;
+    }
 
+    /**
+     * @param fin the fin to set
+     */
+    public void setFin(Point fin) {
+        this.fin = fin;
+    }
+    
     private Segment() {
         this(null, null);
     }
@@ -23,10 +40,6 @@ public class Segment extends FigureSimple {
     public Segment(Point debut, Point fin) {
         this.debut = debut;
         this.fin = fin;
-    }
-
-    public Segment(Point debut, Point fin) {
-        this(debut, fin);
     }
 
     public Point getDebut() {
@@ -37,7 +50,7 @@ public class Segment extends FigureSimple {
         return fin;
     }
 
-    
+    @Override
     public String toString() {
         return "[" + this.debut + "," + this.fin + ']';
     }
@@ -50,26 +63,27 @@ public class Segment extends FigureSimple {
         return new Segment(deb, fin);
     }
 
+    
     public double maxX() {
         return Math.max(this.debut.maxX(), this.fin.maxX());
     }
 
- 
+    
     public double minX() {
         return Math.min(this.debut.minX(), this.fin.minX());
     }
 
-   
+    
     public double maxY() {
         return Math.max(this.debut.maxY(), this.fin.maxY());
     }
 
-    
+  
     public double minY() {
         return Math.min(this.debut.minY(), this.fin.minY());
     }
 
-    @Override
+    
     public double distancePoint(Point p) {
         double x1 = this.debut.getPx();
         double y1 = this.debut.getPy();
@@ -90,25 +104,27 @@ public class Segment extends FigureSimple {
         }
     }
 
+    
     public void dessine(GraphicsContext context) {
-        context.setStroke(this.getCouleur());
+        //context.setStroke(this.getCouleur());
         context.strokeLine(this.debut.getPx(), this.debut.getPy(), this.fin.getPx(), this.fin.getPy());
     }
 
-   
+    
     public void dessineSelection(GraphicsContext context) {
-        context.setStroke(Figure.COULEUR_SELECTION);
+      //  context.setStroke(Figure.COULEUR_SELECTION);
         context.strokeLine(this.debut.getPx(), this.debut.getPy(), this.fin.getPx(), this.fin.getPy());
     }
 
-    public void save(Writer w, Numeroteur<Figure> num) throws IOException {
+  
+    public void save(Writer w, Numeroteur<Segment> num) throws IOException {
         if (!num.objExist(this)) {
-            int id = num.creeID(this);
-            this.debut.save(w, num);
-            this.fin.save(w, num);
-            w.append("Segment" + id +
-                    num.getID(this.debut) + ";" + num.getID(this.fin) +
-                    ";" + FigureSimple.saveColor(this.getCouleur())+"\n");
+            int id = num.creeNum(this);
+            this.debut.save(w, this.debut.getNum());
+            this.fin.save(w, this.fin.getNum());
+            w.append("Segment;" + id + ";" +
+                    num.getOrCreateNum(this) + ";" + num.getOrCreateNum(this) +
+                    "; \n");
         }
     }
 

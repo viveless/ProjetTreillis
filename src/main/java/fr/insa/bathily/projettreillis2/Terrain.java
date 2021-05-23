@@ -19,14 +19,14 @@ public class Terrain {
     private double xmax;
     private double ymin; 
     private double ymax;
-    private List<TriangleTerrain> triangles;
+    private List<TriTerr> triangles;
     
     public Terrain(){
         this.xmin=-2;
         this.xmax=5;
         this.ymin=-5;
         this.ymax=2;
-        this.triangles= new ArrayList<TriangleTerrain>();
+        this.triangles = new ArrayList<TriTerr>();
     }
     
     public Terrain (double xmin, double xmax, double ymin, double ymax){
@@ -34,7 +34,7 @@ public class Terrain {
         this.xmax = xmax;
         this.ymin = ymin;
         this.ymax = ymax;
-        this.triangles= new ArrayList<TriangleTerrain>();
+        this.triangles= new ArrayList<TriTerr>();
     }
     
     public String toString(){
@@ -77,11 +77,11 @@ public class Terrain {
         this.ymax = ymax;
     }
 
-    public List<TriangleTerrain> getTriangles() {
+    public List<TriTerr> getTriangles() {
         return triangles;
     }
 
-    public void setTriangles(List<TriangleTerrain> triangles) {
+    public void setTriangles(List<TriTerr> triangles) {
         this.triangles = triangles;
     } 
     

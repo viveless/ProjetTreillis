@@ -13,45 +13,70 @@ import java.util.TreeMap;
 /**
  *
  * @author mbathily01
+ * @param <TO>
  */
 
 public class Numeroteur<TO> {
-    private Map<Integer, TO> idVersObjet;
-    private Map<Object, Integer> objetVersId;
-    private int prochainId;
+    private TreeMap<Integer, TO> numVersObjet;
+    private Map<TO, Integer> objetVersNum;
+    
+    private int numSuivant;
+    
     
 public Numeroteur (){
     this(0);
 }
+
+
 public Numeroteur (int idSuivant){
-    this.idSuivant=idSuivant;
-    this.idVersObjet=new TreeMap<>();
-    this.objetVersId=new HashMap<>();
+    this.numSuivant = idSuivant;
+    this.numVersObjet = new TreeMap<>();
+    this.objetVersNum = new HashMap<>();
 }
 
-public boolean estPresent(Object obj){
-    return(this.objetVersId.get(obj)!=null);
-}
-
-public int getorCreateId(Object obj){
-    Integer val=this.objetVersId.get(obj);
-    if(val!=null){
-        return val;
+    /**
+     *
+     * @param obj
+     * @return
+     */
+    public int creeNum(TO obj){
+    if(this.objetVersNum.containsKey(obj)){
+        throw new Error("objet" + obj + "deja dans le numeroteur");
     }
-    else{
-        this.objetVersId.put(obj, this.idSuivant);
-        this.cleVersId.put(this.idSuivant, obj);
-        this.idSuivant++;
-        return this.idSuivant-1;
+    this.numVersObjet.put(numSuivant, obj);
+    this.objetVersNum.put(obj, numSuivant);
+    this.numSuivant++;
+    return this.numSuivant - 1;
+}
+
+
+public boolean estPresent(TO obj){
+    return(this.objetVersNum.get(obj)!=null);
+}
+
+
+public boolean objExist(TO obj){
+    return this.objetVersNum.containsKey(obj);
+}
+
+
+public int getOrCreateNum(TO obj){
+    if(this.objExist(obj)){
+        return this.objetVersNum.get(obj);
+    }else{
+        return this.creeNum(obj);
+        
     }
 }
 
-public void associe(Object obj){
-    this.objetVersCle.put(obj, this.CleSuivante);
-    this.cleVersObjet.put(this.CleSuivante, obj);
-    this.CleSuivante++;
+
+public void associe(TO obj){
+    this.objetVersNum.put(obj, this.numSuivant);
+    this.numVersObjet.put(this.numSuivant, obj);
+    this.numSuivant++;
 }
 
 
 
 }
+

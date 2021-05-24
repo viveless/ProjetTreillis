@@ -15,11 +15,11 @@ import javafx.scene.image.ImageView;
  *
  * @author mbathily01
  */
-public class BoutonIcone {
-    public BoutonIcone(String relPathOfImageFile, double sizeX, double sizeY) {
+public class BoutonIcone extends Button{
+    public BoutonIcone(String realPathOfImageFile, double sizeX, double sizeY) {
     InputStream is = this.getClass().getResourceAsStream(realPathOfImageFile);
 if (is == null) {
-            this.setText("?? " + relPathOfImageFile);
+            this.setText("?? " + realPathOfImageFile);
         } else {
             Image img = new Image(is, sizeX, sizeY, false, true);
             this.setGraphic(new ImageView(img));

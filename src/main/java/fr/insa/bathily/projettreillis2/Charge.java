@@ -20,7 +20,7 @@ public class Charge {
     }
     
     public String toString(){
-        return "Noeud;"+n.getIdentifiant()+";"+"Fx;"+px+";"+"Fy;"+py+"\n";
+        return "Noeud;"+n.getNum()+";"+"Fx;"+px+";"+"Fy;"+py+"\n";
     }
 
     public double getPx() {
